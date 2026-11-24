@@ -1,0 +1,21 @@
+---
+arguments_string: --hypervisor vagrant amazon2023-64a-amazon2023-AARCH64a
+environment_variables: {}
+expected_hash:
+  HOSTS:
+    amazon2023-64-1:
+      box: cloud-image/amazon-linux-2023
+      synced_folder: disabled
+      platform: el-9-x86_64
+      hypervisor: vagrant
+      roles:
+      - agent
+    amazon2023-AARCH64-2:
+      box: cloud-image/amazon-linux-2023
+      synced_folder: disabled
+      platform: amazon-2023-aarch64
+      hypervisor: vagrant
+      roles:
+      - agent
+  CONFIG: {}
+expected_exception:

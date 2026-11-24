@@ -81,7 +81,31 @@ module BeakerHostGenerator
       # Oracle publishes aarch64 boxes in a catalog of their own, for
       # VirtualBox only (the "Apple Silicon" boxes). The libvirt boxes are
       # x86_64 only. https://yum.oracle.com/boxes/
+      #
+      # The cloud-image/amazon-linux-2023 versions 12.20260928.0 and
+      # 12.20260930.0 have no downloadable libvirt artifacts (HTTP 400,
+      # "artifact is not ready for download"). Pin libvirt to the last version
+      # with a working artifact. VirtualBox is not affected and keeps using the
+      # registry box. Remove the pin once a newer libvirt artifact is usable.
       PROVIDER_PLATFORM_BOX_OVERRIDES = {
+        'amazon2023-64' => {
+          'vagrant' => {
+            'box' => 'cloud-image/amazon-linux-2023',
+          },
+          'vagrant_libvirt' => {
+            'box' => 'cloud-image/amazon-linux-2023',
+            'box_url' => 'https://vagrantcloud.com/cloud-image/boxes/amazon-linux-2023/versions/12.20260918.0/providers/libvirt/amd64/vagrant.box',
+          },
+        },
+        'amazon2023-AARCH64' => {
+          'vagrant' => {
+            'box' => 'cloud-image/amazon-linux-2023',
+          },
+          'vagrant_libvirt' => {
+            'box' => 'cloud-image/amazon-linux-2023',
+            'box_url' => 'https://vagrantcloud.com/cloud-image/boxes/amazon-linux-2023/versions/12.20260918.0/providers/libvirt/arm64/vagrant.box',
+          },
+        },
         'oracle8-AARCH64' => {
           'vagrant' => {
             'box' => 'oraclelinux/8-aarch64',
